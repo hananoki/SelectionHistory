@@ -9,4 +9,4 @@
 
 ## Licence
 
-[NYSL](https://github.com/hananoki/SelectionHistory/LICENCE.md)
+[NYSL](https://github.com/hananoki/SelectionHistory/blob/master/LICENSE.md)
