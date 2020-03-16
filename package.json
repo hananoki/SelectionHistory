@@ -1,7 +1,7 @@
 {
   "name": "com.hananoki.selection-history",
   "displayName": "SelectionHistory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "unity": "2018.3",
   "description": "Implementation of object selection history for embedded",
   "keywords": [
@@ -10,5 +10,12 @@
   "category": "Editor Extentions",
   "dependencies": {
     "com.hananoki.shared-module": "https://github.com/hananoki/SharedModule.git"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Example",
+      "description": "SelectionHistory operation check",
+      "path": "Samples~/Example"
+    }
+  ]
 }

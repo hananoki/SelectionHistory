@@ -12,7 +12,7 @@ namespace HananokiEditor {
 	public class SelectionHistorySettings {
 		public const string PACKAGE_NAME = "SelectionHistory";
 		public const string PREF_NAME = "Hananoki.SelectionHistory";
-		public const string VER = "v1.00";
+		public const string VER = "0.1.1";
 
 		public int recordObjectCount = 30;
 		public bool enablePingObject = true;
