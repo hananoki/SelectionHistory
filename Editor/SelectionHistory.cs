@@ -5,9 +5,9 @@ using Hananoki;
 using Hananoki.Extensions;
 using System.Collections.Generic;
 
-using Settings = HananokiEditor.SelectionHistorySettings;
+using Settings = Hananoki.SelectionHistory.SettingsEditor;
 
-namespace HananokiEditor {
+namespace Hananoki.SelectionHistory {
 
 	public class SelectionHistoryParameter : ScriptableSingleton<SelectionHistoryParameter> {
 		public int posision = 0;
@@ -81,11 +81,11 @@ namespace HananokiEditor {
 		const int COMMAND_MOVE_POSITION = 1;
 
 		static SelectionHistory() {
-			SelectionHistorySettings.Load();
+			SettingsEditor.Load();
 			self = SelectionHistoryParameter.instance;
 			self.command = 0;
 
-			if( !self.inited ) self.Init( SelectionHistorySettings.i.recordObjectCount );
+			if( !self.inited ) self.Init( SettingsEditor.i.recordObjectCount );
 
 			Selection.selectionChanged += OnSelectionChanged;
 		}
@@ -103,7 +103,7 @@ namespace HananokiEditor {
 			}
 			self.posision++;
 
-			if( SelectionHistorySettings.i.recordObjectCount <= self.Count ) {
+			if( SettingsEditor.i.recordObjectCount <= self.Count ) {
 				self.EraseFirst();
 				self.posision--;
 			}

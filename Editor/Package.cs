@@ -1,8 +1,8 @@
 ﻿
 namespace Hananoki.SelectionHistory {
-  public static class PackageInfo {
+  public static class Package {
     public const string name = "SelectionHistory";
     public const string editorPrefName = "Hananoki.SelectionHistory";
-    public const string version = "0.1.1";
+    public const string version = "1.0.0";
   }
 }

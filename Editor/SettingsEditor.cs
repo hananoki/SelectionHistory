@@ -1,48 +1,44 @@
 ﻿
 //#define ENABLE_LEGACY_PREFERENCE
 
-using Hananoki.Shared.Localize;
-using Hananoki;
+using Hananoki.SharedModule;
 using UnityEditor;
 using UnityEngine;
-using Settings = HananokiEditor.SelectionHistorySettings;
+using E = Hananoki.SelectionHistory.SettingsEditor;
 
-namespace HananokiEditor {
+namespace Hananoki.SelectionHistory {
 	[System.Serializable]
-	public class SelectionHistorySettings {
-		public const string PACKAGE_NAME = "SelectionHistory";
-		public const string PREF_NAME = "Hananoki.SelectionHistory";
-		public const string VER = "0.1.1";
+	public class SettingsEditor {
 
 		public int recordObjectCount = 30;
 		public bool enablePingObject = true;
 
-		public static Settings i;
+		public static E i;
 
 		public static void Load() {
 			if( i != null ) return;
-			i = EditorPrefJson<Settings>.Get( Settings.PREF_NAME );
+			i = EditorPrefJson<E>.Get( Package.editorPrefName );
 		}
 
 		public static void Save() {
-			EditorPrefJson<Settings>.Set( Settings.PREF_NAME, i );
+			EditorPrefJson<E>.Set( Package.editorPrefName, i );
 		}
 	}
 
 
 
-	public class SelectionHistorySettingsWindow : HSettingsEditorWindow {
+	public class SettingsEditorWindow : HSettingsEditorWindow {
 
 		static bool s_changed;
 
 		public static void Open() {
-			var window = GetWindow<SelectionHistorySettingsWindow>();
-			window.SetTitle( new GUIContent( Settings.PACKAGE_NAME, Icon.Get( "SettingsIcon" ) ) );
+			var window = GetWindow<SettingsEditorWindow>();
+			window.SetTitle( new GUIContent( Package.name, Icon.Get( "SettingsIcon" ) ) );
 		}
 
 		void OnEnable() {
 			drawGUI = DrawGUI;
-			Settings.Load();
+			E.Load();
 		}
 
 
@@ -54,13 +50,13 @@ namespace HananokiEditor {
 			using( new PreferenceLayoutScope() ) {
 				EditorGUI.BeginChangeCheck();
 
-				Settings.i.enablePingObject = HEditorGUILayout.ToggleLeft( S._EnablePingObject, Settings.i.enablePingObject );
-				Settings.i.recordObjectCount = EditorGUILayout.IntSlider( S._RecordObjectCount, Settings.i.recordObjectCount, 2, 128 );
+				E.i.enablePingObject = HEditorGUILayout.ToggleLeft( S._EnablePingObject, E.i.enablePingObject );
+				E.i.recordObjectCount = EditorGUILayout.IntSlider( S._RecordObjectCount, E.i.recordObjectCount, 2, 128 );
 				
 				using( new GUILayout.HorizontalScope() ) {
 					GUILayout.FlexibleSpace();
 					if( GUILayout.Button( S._Apply ) ) {
-						SelectionHistoryParameter.instance.Init( Settings.i.recordObjectCount );
+						SelectionHistoryParameter.instance.Init( E.i.recordObjectCount );
 					}
 				}
 
@@ -70,7 +66,7 @@ namespace HananokiEditor {
 			}
 
 			if( s_changed ) {
-				Settings.Save();
+				E.Save();
 			}
 
 			GUILayout.Space( 8f );
@@ -82,12 +78,12 @@ namespace HananokiEditor {
 
 #if UNITY_2018_3_OR_NEWER && !ENABLE_LEGACY_PREFERENCE
 		static void titleBarGuiHandler() {
-			GUILayout.Label( $"{Settings.VER}", EditorStyles.miniLabel );
+			GUILayout.Label( $"{Package.version}", EditorStyles.miniLabel );
 		}
 		[SettingsProvider]
 		public static SettingsProvider PreferenceView() {
-			var provider = new SettingsProvider( $"Preferences/Hananoki/{Settings.PACKAGE_NAME}", SettingsScope.User ) {
-				label = $"{Settings.PACKAGE_NAME}",
+			var provider = new SettingsProvider( $"Preferences/Hananoki/{Package.name}", SettingsScope.User ) {
+				label = $"{Package.name}",
 				guiHandler = PreferencesGUI,
 				titleBarGuiHandler = titleBarGuiHandler,
 			};
@@ -98,7 +94,7 @@ namespace HananokiEditor {
 		[PreferenceItem( Settings.PACKAGE_NAME )]
 		public static void PreferencesGUI() {
 #endif
-			Settings.Load();
+			E.Load();
 			DrawGUI();
 		}
 	}
