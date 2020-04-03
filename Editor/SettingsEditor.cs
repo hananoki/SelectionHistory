@@ -2,6 +2,7 @@
 //#define ENABLE_LEGACY_PREFERENCE
 
 using Hananoki.SharedModule;
+using Hananoki.Extensions;
 using UnityEditor;
 using UnityEngine;
 using E = Hananoki.SelectionHistory.SettingsEditor;
