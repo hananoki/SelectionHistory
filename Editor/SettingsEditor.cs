@@ -31,6 +31,7 @@ namespace Hananoki.SelectionHistory {
 	public class SettingsEditorWindow : HSettingsEditorWindow {
 
 		static bool s_changed;
+		static Vector2 scrollPos;
 
 		public static void Open() {
 			var window = GetWindow<SettingsEditorWindow>();
@@ -48,12 +49,12 @@ namespace Hananoki.SelectionHistory {
 		/// </summary>
 		static void DrawGUI() {
 
-			using( new PreferenceLayoutScope() ) {
+			using( new PreferenceLayoutScope( ref scrollPos ) ) {
 				EditorGUI.BeginChangeCheck();
 
 				E.i.enablePingObject = HEditorGUILayout.ToggleLeft( S._EnablePingObject, E.i.enablePingObject );
 				E.i.recordObjectCount = EditorGUILayout.IntSlider( S._RecordObjectCount, E.i.recordObjectCount, 2, 128 );
-				
+
 				using( new GUILayout.HorizontalScope() ) {
 					GUILayout.FlexibleSpace();
 					if( GUILayout.Button( S._Apply ) ) {
