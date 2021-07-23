@@ -1,0 +1,20 @@
+{
+  "name": "Hananoki.SelectionHistory.Editor",
+  "references": [
+    "Hananoki.SharedModule.Runtime",
+    "Hananoki.SharedModule.RuntimeEditor",
+    "Hananoki.EditorIcon.Editor"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "references.backup": []
+}
